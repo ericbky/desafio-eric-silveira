@@ -62,8 +62,11 @@ class CaixaDaLanchonete {
             { item: 'queijo', requer: 'sanduiche' }
         ];
 
+        console.log(verificacao)
+
         //VERIFICA SE AS CONDIÇÕES SÃO VERDADEIRAS
         verificacao = verificarItens.every(({ item, requer }) => !itens.includes(item) || itens.includes(requer));
+        console.log(verificacao)
 
         return verificacao
     }
@@ -74,8 +77,8 @@ class CaixaDaLanchonete {
         var precos = [3.00, 1.50, 6.20, 6.50, 2.00, 7.25, 9.50, 7.50]
 
         //PEGANDO O VALOR DO PRODUTO DE ACORDO COM O INDEX DELE
-        let index = cardapio.indexOf(pedido)
-        let precoIndividual = precos[index]
+        var index = cardapio.indexOf(pedido)
+        var precoIndividual = precos[index]
 
         //CALCULANDO O VALOR TOTAL
         let valor = precoIndividual * quantidade
@@ -91,6 +94,10 @@ class CaixaDaLanchonete {
             debito: valor => valor //Valor normalizado
         };
 
+        if (typeof valor === 'string') {
+            valor = 0;
+        }
+
         //Analisa o metodo de pagamento recebido com os do objeto
         if (metodoDePagamento in metodosPagamento) {
             //CALCULA O VALOR COM BASE NO MÉTODO DE PAGAMENTO
@@ -101,9 +108,5 @@ class CaixaDaLanchonete {
         }
     }
 }
-
-const resultado = new CaixaDaLanchonete()
-            console.log(resultado.calcularValorDaCompra(['chantily,1','cafe,1']))
-
 
 export { CaixaDaLanchonete };
